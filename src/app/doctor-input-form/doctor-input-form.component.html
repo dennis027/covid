@@ -1,0 +1,50 @@
+<div class="container-fluid" style="font-family: 'Yeon Sung', cursive; padding-top:2%">
+  <h2 class="text-center"  style="font-family: 'Yeon Sung', cursive;">Doctors' feedback form</h2>
+  <form (ngSubmit)='submitInput()' #inputForm='ngForm' style="margin-left: 9%;">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <div class="form-group">
+        <select [(ngModel)]="newInput.name" id="name" name="name" required class="form-control">
+          <option *ngFor="let patient of patients" [value]="patient.name">
+            {{patient.name}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select [(ngModel)]="newInput.status" [ngModelOptions]="{standalone: true}" id="status" name="status" required
+          class="form-control">
+          <option [value]="'positive'">
+            Positive
+          </option>
+          <option [value]="'negative'">
+            Negative
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="recomendations">Recomendations</label>
+        <select [(ngModel)]="newInput.recomendations" [ngModelOptions]="{standalone: true}" id="recomendations"
+          name="recomendations" required class="form-control">
+          <option [value]="'hospital care'">
+            Hospital Care
+          </option>
+          <option [value]="'home care'">
+            Home Care
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="remarks">Remarks</label>
+        <textarea class="form-control" id="remarks" [(ngModel)]="newInput.remarks" name="remarks" rows="4"
+          #remarks='ngModel' required></textarea>
+        <div [hidden]="remarks.valid || remarks.pristine" class="alert alert-danger">
+          <p>remarks is required</p>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-success" (click)="showSuccess()">submit</button>
+      </div>
+    </div>
+  </form>
+</div>
